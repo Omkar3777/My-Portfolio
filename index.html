@@ -8,7 +8,7 @@
 
   <style>
     :root{
-      --bg:#0f1724; /* dark */
+      --bg:#0f1724;
       --card:#0b1220;
       --muted:#9aa4b2;
       --accent:#06b6d4;
@@ -20,11 +20,14 @@
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071022);color:#e6eef6}
     .container{max-width:1100px;margin:40px auto;padding:28px}
 
-    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .brand{display:flex;gap:14px;align-items:center}
     .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
+    nav{display:flex;gap:18px;flex-wrap:wrap}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:#fff}
+
+    .menu-toggle{display:none;background:none;border:none;color:white;font-size:24px;cursor:pointer}
 
     .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;margin-top:28px;align-items:center}
     .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:28px;border-radius:var(--radius);box-shadow:0 6px 20px rgba(2,6,23,0.6);}
@@ -40,7 +43,7 @@
     .avatar{width:220px;height:220px;border-radius:20px;background:linear-gradient(135deg,#1e293b,#0f1724);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:var(--accent);box-shadow:inset 0 -8px 30px rgba(0,0,0,0.4)}
     .meta{margin-top:12px;color:var(--muted)}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px,1fr));gap:18px;margin-top:28px}
     .project{padding:18px;border-radius:12px;background:var(--glass)}
     .project h3{margin:0 0 6px 0}
     .skills{display:flex;flex-wrap:wrap;gap:10px}
@@ -49,11 +52,18 @@
     footer{margin-top:36px;text-align:center;color:var(--muted);font-size:14px}
 
     /* responsive */
-    @media (max-width:960px){.hero{grid-template-columns:1fr;}.grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:640px){.grid{grid-template-columns:1fr}.logo{width:48px;height:48px}}
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .logo{width:48px;height:48px}
+      nav{display:none;flex-direction:column;background:var(--card);padding:10px;border-radius:var(--radius);margin-top:10px}
+      nav.active{display:flex}
+      .menu-toggle{display:block}
+    }
 
     /* contact form */
-    form{display:grid;gap:10px}
+    form{display:grid;gap:10px;margin-top:12px}
     input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:#e6eef6}
     input::placeholder,textarea::placeholder{color:var(--muted)}
     textarea{min-height:120px}
@@ -69,6 +79,7 @@
           <div style="font-size:13px;color:var(--muted)">Computer Engineer · Data Science · Designer</div>
         </div>
       </div>
+      <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">☰</button>
       <nav>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
@@ -85,17 +96,6 @@
         <div class="cta">
           <a class="btn" href="#projects">See my work</a>
           <a class="btn ghost" href="#contact" style="margin-left:12px">Get in touch</a>
-        </div>
-
-        <div style="margin-top:18px">
-          <strong>Quick links:</strong>
-          <div class="skills" style="margin-top:10px">
-            <span class="skill">Python</span>
-            <span class="skill">Django</span>
-            <span class="skill">Machine Learning</span>
-            <span class="skill">NLP</span>
-            <span class="skill">Graphic Design</span>
-          </div>
         </div>
       </div>
 
@@ -116,82 +116,47 @@
     <section id="projects" style="margin-top:18px">
       <h2 style="margin-bottom:12px">Selected Projects</h2>
       <div class="grid">
-        <article class="project">
-          <h3>Automatic Timetable Generator</h3>
-          <p class="lead">A Django-based system that generates adaptive timetables for teachers with role-based access and downloadable schedules.</p>
-          <div style="margin-top:8px"><a class="btn ghost" href="#">View repo</a></div>
-        </article>
-
-        <article class="project">
-          <h3>Visual Speech Recognition (Research)</h3>
-          <p class="lead">Research project on lip-movement based speech recognition — data collection, feature extraction and model training.</p>
-        </article>
-
-        <article class="project">
-          <h3>CollabIn — Artist Network</h3>
-          <p class="lead">A prototype platform to help artists connect, showcase work, and collaborate on projects.</p>
-        </article>
-
-        <article class="project">
-          <h3>FreePaani / AquaAd Campaign</h3>
-          <p class="lead">Brand & campaign concept combining premium water distribution with charitable giving and branded reach.</p>
-        </article>
-
-        <article class="project">
-          <h3>Band & Studio Launch</h3>
-          <p class="lead">Branding, assets, and launch collateral for a music studio and band releases.</p>
-        </article>
-
-        <article class="project">
-          <h3>Other Work</h3>
-          <p class="lead">Packaging designs, social campaigns, and small web apps.</p>
-        </article>
+        <article class="project"><h3>Automatic Timetable Generator</h3><p class="lead">Django-based adaptive timetable system with role-based access.</p></article>
+        <article class="project"><h3>Visual Speech Recognition</h3><p class="lead">Research project on lip-movement based speech recognition.</p></article>
+        <article class="project"><h3>CollabIn — Artist Network</h3><p class="lead">Prototype platform for artists to collaborate and connect.</p></article>
+        <article class="project"><h3>AquaAd Campaign</h3><p class="lead">Brand & campaign combining premium water with charity reach.</p></article>
+        <article class="project"><h3>Music Studio Launch</h3><p class="lead">Branding & launch collateral for music studio and band.</p></article>
+        <article class="project"><h3>Other Work</h3><p class="lead">Packaging designs, social campaigns, small web apps.</p></article>
       </div>
     </section>
 
     <section id="skills" class="card" style="margin-top:18px">
       <h2>Skills</h2>
-      <div style="margin-top:12px" class="skills">
-        <span class="skill">Python</span>
-        <span class="skill">Django</span>
-        <span class="skill">Pandas & NumPy</span>
-        <span class="skill">Machine Learning</span>
-        <span class="skill">NLP</span>
-        <span class="skill">Data Visualization</span>
-        <span class="skill">Graphic Design</span>
-        <span class="skill">Adobe Photoshop</span>
-        <span class="skill">Figma</span>
+      <div class="skills" style="margin-top:12px">
+        <span class="skill">Python</span><span class="skill">Django</span><span class="skill">Machine Learning</span>
+        <span class="skill">NLP</span><span class="skill">Data Visualization</span><span class="skill">Graphic Design</span>
+        <span class="skill">Adobe Photoshop</span><span class="skill">Figma</span>
       </div>
     </section>
 
     <section id="contact" class="card" style="margin-top:18px">
-      <h2>Contact</h2>
-      <p class="lead">Want to work together or have a project idea? Drop a short message below or email me at <strong>youremail@example.com</strong>.</p>
-      <form onsubmit="handleSubmit(event)">
-        <input id="name" placeholder="Your name" required />
-        <input id="email" type="email" placeholder="Your email" required />
-        <textarea id="message" placeholder="Quick message" required></textarea>
+      <h2>Contact</h2> // form id repalce
+      <p class="lead">Want to work together? Drop a short message below or email me at <strong>youremail@example.com</strong>.</p>
+      <form action="https://formspree.io/f/yourFormID" method="POST">
+        <input name="name" placeholder="Your name" required />
+        <input name="email" type="email" placeholder="Your email" required />
+        <textarea name="message" placeholder="Quick message" required></textarea>
         <div style="display:flex;gap:10px">
           <button class="btn" type="submit">Send</button>
           <button class="btn ghost" type="reset">Reset</button>
         </div>
       </form>
-      <script>
-        function handleSubmit(e){
-          e.preventDefault();
-          const name = document.getElementById('name').value;
-          const email = document.getElementById('email').value;
-          const message = document.getElementById('message').value;
-          alert('Thanks, ' + name + '! Your message was prepared to send (demo).\n\nEmail: ' + email + '\nMessage: ' + message);
-          e.target.reset();
-        }
-      </script>
     </section>
 
     <footer>
       <div>Made with ☕ & code — Omkar Jadhav</div>
-      <div style="margin-top:8px">© " + new Date().getFullYear() + " Omkar Jadhav</div>
+      <div id="year"></div>
     </footer>
   </div>
+
+  <script>
+    // Fix year in footer
+    document.getElementById("year").textContent = "© " + new Date().getFullYear() + " Omkar Jadhav";
+  </script>
 </body>
 </html>
