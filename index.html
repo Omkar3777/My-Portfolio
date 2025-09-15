@@ -22,7 +22,9 @@
 
     header{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .brand{display:flex;gap:14px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden}
+    .logo img{width:100%;height:auto;object-fit:contain}
+
     nav{display:flex;gap:18px;flex-wrap:wrap}
     nav a{color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:#fff}
@@ -40,7 +42,24 @@
     .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
     .profile{display:flex;flex-direction:column;align-items:center;text-align:center}
-    .avatar{width:220px;height:220px;border-radius:20px;background:linear-gradient(135deg,#1e293b,#0f1724);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:var(--accent);box-shadow:inset 0 -8px 30px rgba(0,0,0,0.4)}
+.avatar {
+  width: 220px;
+  height: 220px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1e293b, #0f1724);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* ensures image doesn’t overflow */
+  box-shadow: inset 0 -8px 30px rgba(0,0,0,0.4);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills the box neatly */
+  border-radius: 20px;
+}
     .meta{margin-top:12px;color:var(--muted)}
 
     .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px,1fr));gap:18px;margin-top:28px}
@@ -57,6 +76,8 @@
     }
     @media (max-width:640px){
       .logo{width:48px;height:48px}
+      .logo img{width:100%;height:100%;object-fit:contain}
+
       nav{display:none;flex-direction:column;background:var(--card);padding:10px;border-radius:var(--radius);margin-top:10px}
       nav.active{display:flex}
       .menu-toggle{display:block}
@@ -73,7 +94,9 @@
   <div class="container">
     <header>
       <div class="brand">
-        <div class="logo">OJ</div>
+        <div class="logo">
+          <img src="OJ.png" alt="Logo" />
+        </div>
         <div>
           <div style="font-weight:700">Omkar Jadhav</div>
           <div style="font-size:13px;color:var(--muted)">Computer Engineer · Data Science · Designer</div>
@@ -98,14 +121,16 @@
           <a class="btn ghost" href="#contact" style="margin-left:12px">Get in touch</a>
         </div>
       </div>
-
       <aside class="card profile">
-        <div class="avatar">OJ</div>
-        <div class="meta">Based in India · open to internships & freelance</div>
-        <div style="margin-top:12px">
-          <a class="btn" href="#contact">Hire / Collaborate</a>
-        </div>
-      </aside>
+  <div class="avatar">
+    <img src="omkar.jpg" alt="Omkar Jadhav" />
+  </div>
+  <div class="meta">Based in India · open to internships & freelance</div>
+  <div style="margin-top:12px">
+    <a class="btn" href="#contact">Hire / Collaborate</a>
+  </div>
+</aside>
+
     </section>
 
     <section id="about" class="card" style="margin-top:20px">
@@ -135,8 +160,8 @@
     </section>
 
     <section id="contact" class="card" style="margin-top:18px">
-      <h2>Contact</h2> 
-      <p class="lead">Want to work together? Drop a short message below or email me at <strong>omkarjadhav3777@gmail.com</strong>.</p>
+      <h2>Contact</h2> <!-- form id replaced -->
+      <p class="lead">Want to work together? Drop a short message below or email me at <strong>youremail@example.com</strong>.</p>
       <form action="https://formspree.io/f/mvgbnryj" method="POST">
         <input name="name" placeholder="Your name" required />
         <input name="email" type="email" placeholder="Your email" required />
@@ -160,4 +185,3 @@
   </script>
 </body>
 </html>
-
